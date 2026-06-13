@@ -10,7 +10,7 @@ from utils.video_helpers import draw_inference_overlays
 tf.set_page_config(page_title="Enterprise Video Analytics Pipeline", layout="wide")
 tf.title(" Scalable Video Analytics & Multi-Object Tracking Pipeline")
 
-model_path = r"runs\detect\runs\detect\enterprise_analytics_model\weights\best.onnx"
+model_path = r"best.onnx"
 detector = VideoDetector(model_path=model_path)
 tracker = IdentityTracker()
 analytics = SpatialAnalyticsEngine(line_coords=[(0, 240), (640, 240)])
