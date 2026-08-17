@@ -88,6 +88,21 @@ python convert.py
 
 The pipeline ships with `yolov8n.pt` (YOLOv8 nano, ~6.5 MB). ONNX export is used at inference time for faster CPU throughput via `onnxruntime`.
 
+## Limitations
+
+- **No re-identification.** The centroid tracker matches purely on distance between
+  frames, with no appearance model. Objects that cross paths or occlude each other
+  can swap IDs, and an object that leaves and re-enters the frame is assigned a new
+  ID. Appearance-based trackers (SORT, DeepSORT) address this with motion prediction
+  and appearance embeddings.
+- **Counts are per-track, not per-object.** Line-crossing counts tally unique track
+  IDs, so an object that exits and re-enters is counted twice. This inherits directly
+  from the limitation above.
+- **Accuracy traded for CPU throughput.** Uses the nano variant with a short training
+  run (10 epochs), chosen so the pipeline runs in real time on CPU without a GPU.
+  Small, top-down drone-view objects are a hard case for a model this size.
+- **Single-stream, single-process.** No batching, no concurrent stream handling.
+
 ## Dataset
 
 [VisDrone2019-DET](https://github.com/VisDrone/VisDrone-Dataset) — a large-scale benchmark collected by drones over various urban scenes, providing 6,471 training images, 548 validation images, and 1,610 test images.
