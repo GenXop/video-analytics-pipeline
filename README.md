@@ -52,7 +52,7 @@ The model detects 10 classes from the VisDrone dataset:
 **Prerequisites:** Python 3.9+
 
 ```bash
-git clone https://github.com/your-username/video-analytics-pipeline.git
+git clone https://github.com/GenXop/video-analytics-pipeline.git
 cd video-analytics-pipeline
 pip install -r requirements.txt
 ```
